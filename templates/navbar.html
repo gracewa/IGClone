@@ -1,0 +1,60 @@
+{% load static %}
+
+
+<div class="site-navbar-top">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-4 col-md-8 mb-3 mb-md-0 col-md-4 order-1 order-md-2">
+                        <div>
+                            <a href="/">
+                                <img class="img-fluid" src="{% static 'images/newlogo.png' %}" style="max-width: 150px;"/>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-6 col-md-4 order-3 order-md-3 text-right">
+                        <div class="site-top-icons">
+                            <ul>
+                                <li>
+                                    {% if request.user.is_authenticated %}
+                                        <a href="/accounts/logout/"><span><i class="fas fa-sign-out-alt"></i></span></a>
+                                    {% else %}
+                                        <a href="/accounts/login/"><span><i
+                                                class="fas fa-sign-in-alt"></i></span></a>
+                                    {% endif %}
+                                </li>
+
+                                <li class="d-inline-block d-md-none ml-md-0">
+                                    <a href="#" class="site-menu-toggle js-menu-toggle">
+                                        <span><i class="fas fa-bars"></i></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <!-- Adding a search form  -->
+      <div class="col-sm-10 col-md-10 ">
+
+        <form class="navbar-form" role="search" action="{% url 'core:search_results' %}">
+
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search Photos" name="photo">
+            <div class="input-group-btn">
+              <button class="btn btn-default" type="submit"><i class="fas fa-search"></i>
+
+</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <!-- search form end -->
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
