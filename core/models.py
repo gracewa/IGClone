@@ -21,13 +21,13 @@ class Profile(models.Model):
         return profile
 
 class Photo(models.Model):
-    title=models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
     image = models.ImageField(upload_to='images/', default='noimage.png')
     description = models.CharField(max_length=500, default='no description')
     user = models.ForeignKey(User, blank=True,
-                                 null=True, on_delete=models.CASCADE)
+                             null=True, on_delete=models.CASCADE)
     profile = models.ForeignKey(Profile, blank=True,
-        null=True, on_delete=models.CASCADE)
+                                null=True, on_delete=models.CASCADE)
 
 
     def __str__(self):

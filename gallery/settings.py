@@ -70,7 +70,7 @@ WSGI_APPLICATION = 'gallery.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'igclone',
+        'NAME': 'igclone2',
         'USER': 'postgres',
         'PASSWORD':'g11111111',
     }
