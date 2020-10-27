@@ -57,7 +57,16 @@ def update_profile(request):
         form = ProfileForm()
         return render(request, 'profile.html', {'form': form, 'messages': messages})
 
+@login_required
+def delete_image(request, pk):
+    photo = Photo.objects.get(pk=pk)
 
+    if request.user.id == 'photo.user':
+        photo.delete_image()
+        return redirect('core:index')
+    else:
+        messages.add_message(request, messages.INFO, 'You do not have permission to delete that image')
+        return redirect('core:index')
 
 def image_view(request):
     if request.method == 'POST':
@@ -74,3 +83,4 @@ def image_view(request):
 
 def success(request):
     return HttpResponse('successfully uploaded')
+

@@ -7,6 +7,7 @@ app_name = 'core'
 urlpatterns = [
     path('', views.index, name='index'),
     path("<int:pk>/", views.photo_detail, name="photo_detail"),
+    path("<int:pk>/delete/", views.photo_detail, name="photo_detail"),
     path(r'search/', views.search_results, name='search_results'),
     path(r'accounts/profile/', views.update_profile, name='update_profile'),
     path('upload/', views.image_view, name = 'image_upload'),
