@@ -3,8 +3,10 @@ from cloudinary.forms import CloudinaryFileField
 from .models import Profile, Photo
 
 
-class ProfileForm(forms.Form):
-    bio = forms.CharField(label='Update Bio', max_length=500)
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['bio', 'image']
 
 class ImageUploadForm(forms.ModelForm):
     image = CloudinaryFileField(

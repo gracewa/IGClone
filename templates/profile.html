@@ -30,16 +30,9 @@
     </div>
 
     <div class="container-fluid">
-
-        <form method="post" enctype="multipart/form-data" >
-            {% csrf_token %}
-            {{ form.image }}
-            <input type="submit" value="Upload">
-        </form>
-<br>
-            <form action="{%url 'core:update_profile'%}" method="post">
+      <form action="{%url 'core:update_profile'%}" method="post">
                 {%csrf_token%}
-                {% bootstrap_form bioform layout='inline' %}
+                {% bootstrap_form form layout='inline' %}
                 <input type="submit" value="Save">
             </form>
 
