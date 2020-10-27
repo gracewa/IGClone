@@ -1,10 +1,22 @@
 import os
+import cloudinary
+import environ
 
+
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SECRET_KEY = os.environ.get('SECRET_KEY')
-DEBUG = os.environ.get('DEBUG')
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = env('DEBUG')
+
+cloudinary.config(
+    cloud_name = 'group6flask',
+    api_key = '771748118468722',
+    api_secret = 'Uye0Bi1UGZRvFNO8O8viekFqqIE',
+    secure = True)
 ALLOWED_HOSTS = ['*']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -17,7 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
-
+    'bootstrap3',
+    'cloudinary',
     'django.contrib.sites',
     'allauth',
     'allauth.account',

@@ -1,0 +1,14 @@
+{%extends 'base.html'%}
+{% load bootstrap3 %}
+
+{% block content %}
+<div class="row">
+<div class="col-md-3 offset-md-4">
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form layout='inline' %}
+    <button type="submit">Upload</button>
+</form>
+</div>
+</div>
+{% endblock content %}

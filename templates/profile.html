@@ -1,0 +1,48 @@
+{%extends 'base.html'%}
+{% load bootstrap3 %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <!-- displaying  Username-->
+        <div class="col-md-4">
+            <h3> {{user}} </h3>
+
+            <!--Displaying user bio-->
+
+            {% for i in updated_profile %}
+            <p> {{i.bio}}</p>
+            {% endfor %}
+        </div>
+
+        <!--Display profile photo-->
+        <div class="col-md-4">
+
+            {% if updated_profile.image.url %}
+
+            <img src="{{updated_profile.image.url}}" alt="" >
+
+            {%else%}
+            <p>No profile picture</p>
+
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container-fluid">
+
+        <form method="post" enctype="multipart/form-data" >
+            {% csrf_token %}
+            {{ form.image }}
+            <input type="submit" value="Upload">
+        </form>
+<br>
+            <form action="{%url 'core:update_profile'%}" method="post">
+                {%csrf_token%}
+                {% bootstrap_form bioform layout='inline' %}
+                <input type="submit" value="Save">
+            </form>
+
+    </div>
+    {% endblock content %}
+</div>
