@@ -756,7 +756,10 @@ a {
   width: 120%;
   height: 120%;
 }
-
+.imageContainer img {
+  width: 50%;
+  height: 50%;
+}
 /* Profile Section */
 
 .profile {
@@ -840,4 +843,12 @@ a {
 .profile-stat-count,
 .profile-edit-btn {
     font-weight: 600;
+}
+
+form {
+  max-width: 300px;
+  margin: 10px auto;
+  padding: 10px 20px;
+  background: #f4f7f8;
+  border-radius: 8px;
 }

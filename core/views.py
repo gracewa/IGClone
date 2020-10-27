@@ -33,14 +33,13 @@ def search_results(request):
     if 'photo' in request.GET and request.GET["photo"]:
         search_term = request.GET.get("photo")
         g = get_object_or_404(User, username=search_term)
-        i = g.pk
-        profile = get_object_or_404(Profile, pk=i)
+        profile = get_object_or_404(Profile, pk=g.pk)
 
-        searched_photos = profile.photo_set.all()
+        searched_photos = Photo.objects.filter(profile=profile)
 
         message = f"{search_term}"
 
-        return render(request, 'search.html',{"message":message,"photos": searched_photos})
+        return render(request, 'search.html',{"message":message,"photos": searched_photos, 'profile':profile})
 
     else:
         message = "You haven't entered a search term"

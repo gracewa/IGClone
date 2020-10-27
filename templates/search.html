@@ -1,17 +1,74 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<header class="site-navbar" role="banner">
+        {% include 'navbar.html' %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
+                    <span class="alert-inner--text">{{ message }}</span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endif %}
+<nav class="site-navigation text-right text-md-center" role="navigation">
+        <div class="container">
+            {% if request.user.is_authenticated %}
+
+            <div class="profile">
+
+                <div class="profile-image">
+
+                    <img src="{{profile.image.url}}"
+                         alt="">
+
+                </div>
+
+                <div class="profile-user-settings">
+
+                    <h1 class="profile-user-name">{{profile.user.username}}</h1>
+
+                    <a class="profile-edit-btn" href="/accounts/profile/"><span><i class="fas fa-user"></i></span> Edit Profile</a>
+                    <a class="profile-edit-btn" href="/upload/"><span><i class="fa fa-upload" aria-hidden="true"></i></span> Upload Photo</a>
+
+
+                </div>
+
+                <div class="profile-stats">
+
+                    <ul>
+                        <li><span class="profile-stat-count">{{photos|length}}</span> posts</li>
+                        <li><span class="profile-stat-count">{{profile.followers}}</span> followers</li>
+                        <li><span class="profile-stat-count">206</span> following</li>
+                    </ul>
+
+                </div>
+
+                <div class="profile-bio">
+
+                    <p><span class="profile-real-name">Jane Doe</span> {{profile.bio}} 📷✈️🏕️</p>
+
+                </div>
+
+            </div>
+
+            <!-- End of profile section -->
+
+            {% endif %}
+            {% if request.user.is_staff %}
+            <li><a href="/">Staff</a></li>
+            {% endif %}
+            </ul>
+        </div>
+    </nav>
+    </header>
+{% endblock header %}
 {% block content %}
-<div class="container">
-
-  <div class="row">
-    {% if articles%}
-      <h2>Found {{ photos|length }} of searched term {{message}}</h2>
-    {% else %}
-      <h2> Found 0 articles for the search term {{message}}</h2>
-    {% endif %}
-
-  </div>
-
-  <div class="row">
+<div class="row">
     {% for photo in photos %}
     <div class="col-md-3 offset-md-1">
         <div class="imageContainer">
@@ -21,10 +78,12 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title" id="card-title">{{ photo.title }}</h5>
-                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#modal{{photo.title}}">View
+                <button type="button" class="btn-outline-danger" data-toggle="modal"
+                        data-target="#modal{{photo.title}}">View
                     Details
                 </button>
-                <div class="modal fade" id="modal{{photo.title}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                <div class="modal fade" id="modal{{photo.title}}" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel"
                      aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -46,10 +105,10 @@
                             <!--Footer-->
                             <div class="modal-footer">
                                 <div class="res">
-                                <a href="/{{photo.pk}}/"
-                                   class="btn btn-outline-warning">
-                                    Copy Link
-                                </a>
+                                    <a href="/{{photo.pk}}/"
+                                       class="btn btn-outline-warning">
+                                        Copy Link
+                                    </a>
                                 </div>
                                 <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Close
                                 </button>
@@ -62,4 +121,4 @@
     </div>
     {% endfor %}
 </div>
-{% endblock %}
+{% endblock content %}
